@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGNGL7PR2S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YGNGL7PR2S');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wuhan Food</title>
+  <link rel="icon" href="images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180x180.png">
+
+  <style>
+    :root {
+      --deep-pink: #D8A9B4;
+      --light-pink: #F8E2E8;
+      --white: #FFFFFF;
+      --deep-gray: #666666;
+      --soft-gray: #F5F5F5;
+      --transition: 0.3s ease;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --max-width: 1240px;
+      --shadow-soft: 0 6px 18px rgba(216, 169, 180, 0.18);
+      --shadow-card: 0 6px 16px rgba(216, 169, 180, 0.14);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      color: var(--deep-gray);
+      line-height: 1.7;
+      background: var(--light-pink);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a,
+    button {
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .nav-bar {
+      width: 100%;
+      background-color: rgba(216, 169, 180, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(2px);
+    }
+
+    .nav-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 0;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 42px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      position: relative;
+      display: inline-block;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--white);
+      padding: 6px 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-link.active::after {
+      transform: scaleX(1);
+    }
+
+    main {
+      padding: 28px 0 40px;
+      background: var(--light-pink);
+    }
+
+    .carousel-section {
+      margin-bottom: 34px;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 540px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background-color: var(--soft-gray);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease-in-out;
+      z-index: 1;
+      background-color: var(--soft-gray);
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: var(--soft-gray);
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(216, 169, 180, 0.10);
+      pointer-events: none;
+    }
+
+    .carousel-overlay h1 {
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.4px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .carousel-overlay p {
+      max-width: 800px;
+      color: var(--white);
+      font-size: 18px;
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 6;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background-color: var(--deep-pink);
+      color: var(--white);
+      font-size: 28px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(216, 169, 180, 0.22);
+    }
+
+    .carousel-arrow:hover {
+      transform: translateY(-50%) scale(1.08);
+      filter: brightness(0.95);
+    }
+
+    .carousel-arrow.prev {
+      left: 18px;
+    }
+
+    .carousel-arrow.next {
+      right: 18px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 6;
+      display: flex;
+      gap: 10px;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--white);
+      border: none;
+      opacity: 0.9;
+    }
+
+    .carousel-dot.active {
+      background-color: var(--deep-pink);
+      transform: scale(1.15);
+    }
+
+    .welcome-block {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .welcome-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      margin-bottom: 10px;
+    }
+
+    .welcome-divider {
+      width: 88px;
+      height: 2px;
+      background-color: var(--deep-pink);
+      margin: 0 auto 18px;
+      border-radius: 999px;
+    }
+
+    .welcome-subtitle {
+      font-size: 18px;
+      color: var(--white);
+      font-weight: 400;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .food-showcase {
+      margin-bottom: 42px;
+    }
+
+    .food-circle-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 26px 34px;
+    }
+
+    .food-card {
+      width: 320px;
+      background-color: var(--white);
+      border-radius: 180px 180px 26px 26px;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .food-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(216, 169, 180, 0.18);
+    }
+
+    .food-image-box {
+      width: 100%;
+      background-color: var(--soft-gray);
+      padding: 22px 22px 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .food-image-box img {
+      width: 235px;
+      height: 235px;
+      object-fit: cover;
+      border-radius: 50%;
+      background-color: var(--soft-gray);
+      border: 3px solid var(--light-pink);
+    }
+
+    .food-content {
+      background-color: var(--white);
+      padding: 16px 22px 24px;
+      text-align: center;
+    }
+
+    .food-content h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .food-content p {
+      font-size: 15px;
+      color: var(--deep-gray);
+      line-height: 1.7;
+    }
+
+    .culture-panel {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+
+    .culture-panel h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .culture-panel p {
+      font-size: 16px;
+      color: var(--deep-gray);
+      text-align: left;
+      margin-bottom: 14px;
+    }
+
+    .culture-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .site-footer {
+      width: 100%;
+      background-color: var(--deep-pink);
+      color: var(--white);
+      text-align: center;
+      padding: 26px 16px;
+      margin-top: 10px;
+    }
+
+    .site-footer p {
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    @media (max-width: 1100px) {
+      .carousel {
+        height: 470px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 40px;
+      }
+
+      .food-card {
+        width: 300px;
+      }
+
+      .food-image-box img {
+        width: 220px;
+        height: 220px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-inner {
+        min-height: auto;
+        padding: 14px 0;
+      }
+
+      .nav-list {
+        gap: 22px;
+      }
+
+      .nav-link {
+        font-size: 18px;
+      }
+
+      .carousel {
+        height: 320px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 28px;
+      }
+
+      .carousel-overlay p {
+        font-size: 14px;
+      }
+
+      .carousel-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+      }
+
+      .welcome-title {
+        font-size: 30px;
+      }
+
+      .welcome-subtitle {
+        font-size: 16px;
+      }
+
+      .food-circle-wrap {
+        gap: 22px;
+      }
+
+      .food-card {
+        width: 100%;
+        max-width: 360px;
+      }
+
+      .food-image-box img {
+        width: 210px;
+        height: 210px;
+      }
+
+      .food-content h3 {
+        font-size: 20px;
+      }
+
+      .food-content p,
+      .culture-panel p {
+        font-size: 15px;
+      }
+
+      .culture-panel {
+        padding: 22px;
+      }
+
+      .culture-panel h2 {
+        font-size: 26px;
+      }
+
+      .site-footer p {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel {
+        height: 250px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 22px;
+      }
+
+      .carousel-overlay p {
+        font-size: 13px;
+      }
+
+      .welcome-title {
+        font-size: 25px;
+      }
+
+      .food-card {
+        border-radius: 140px 140px 22px 22px;
+      }
+
+      .food-image-box {
+        padding: 18px 18px 10px;
+      }
+
+      .food-image-box img {
+        width: 180px;
+        height: 180px;
+      }
+
+      .food-content h3 {
+        font-size: 18px;
+      }
+
+      .culture-panel h2 {
+        font-size: 22px;
+      }
+    }
+
+    /* ---------- Custom Hello Kitty Cursor（修复版） ---------- */
+    html,
+    body {
+      cursor: url("images/1.cur"), auto;
+    }
+
+    a,
+    button,
+    .nav-link,
+    .carousel-arrow,
+    .carousel-dot {
+      cursor: url("images/1.cur"), pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-bar">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="introduction.html">Introduction</a></li>
+        <li><a class="nav-link active" href="food.html">Food</a></li>
+        <li><a class="nav-link" href="scenic.html">Scenic Spots</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <section class="carousel-section">
+        <div class="carousel" id="carousel">
+
+          <div class="carousel-slide active">
+            <img src="images/food_热干面横图.jpg" alt="Wuhan Hot Dry Noodles Close-up">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/food_三鲜豆皮横图.jpg" alt="Wuhan Sanxian Doupi (Three Fresh Beancurd)">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/food_周黑鸭横图.jpg" alt="Wuhan Zhou Hei Ya Braised Snacks">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/food_清蒸鱼横图.jpg" alt="Steamed Wuchang Fish, Wuhan">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/food_小龙虾横图.jpg" alt="Wuhan Braised Crayfish">
+          </div>
+
+          <div class="carousel-overlay">
+            <h1>Wuhan Food</h1>
+            <p>Discover the rich local flavors that make Wuhan one of the most memorable culinary cities in central China</p>
+          </div>
+
+          <button class="carousel-arrow prev" id="prevBtn" aria-label="Previous slide">&#10094;</button>
+          <button class="carousel-arrow next" id="nextBtn" aria-label="Next slide">&#10095;</button>
+
+          <div class="carousel-dots" id="carouselDots">
+            <button class="carousel-dot active" aria-label="Go to slide 1"></button>
+            <button class="carousel-dot" aria-label="Go to slide 2"></button>
+            <button class="carousel-dot" aria-label="Go to slide 3"></button>
+            <button class="carousel-dot" aria-label="Go to slide 4"></button>
+            <button class="carousel-dot" aria-label="Go to slide 5"></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="welcome-block">
+        <h1 class="welcome-title">Wuhan Local Cuisine · A Taste of Jiangcheng</h1>
+        <div class="welcome-divider"></div>
+        <p class="welcome-subtitle">Explore the iconic flavors that define Wuhan's food culture</p>
+      </section>
+
+      <section class="food-showcase">
+        <div class="food-circle-wrap">
+
+          <article class="food-card">
+            <div class="food-image-box">
+              <img src="images/food_热干面圆图.jpg" alt="Wuhan Hot Dry Noodles">
+            </div>
+            <div class="food-content">
+              <h3>Hot Dry Noodles</h3>
+              <p>
+                The iconic breakfast of Wuhan, chewy noodles mixed with fragrant sesame paste, a daily staple for locals.
+              </p>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-image-box">
+              <img src="images/food_三鲜豆皮圆图.jpg" alt="Wuhan Sanxian Doupi">
+            </div>
+            <div class="food-content">
+              <h3>Sanxian Doupi</h3>
+              <p>
+                A crispy golden beancurd sheet stuffed with glutinous rice, eggs, and fresh meat, a classic Wuhan morning snack.
+              </p>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-image-box">
+              <img src="images/food_周黑鸭圆图.jpg" alt="Wuhan Zhou Hei Ya">
+            </div>
+            <div class="food-content">
+              <h3>Zhou Hei Ya</h3>
+              <p>
+                Spicy and flavorful braised duck snacks, a nationally famous Wuhan specialty with a numbing, savory taste.
+              </p>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-image-box">
+              <img src="images/food_武昌鱼圆图.jpg" alt="Steamed Wuchang Fish">
+            </div>
+            <div class="food-content">
+              <h3>Steamed Wuchang Fish</h3>
+              <p>
+                A legendary freshwater fish from the Yangtze River, steamed to perfection, praised in ancient Chinese poetry.
+              </p>
+            </div>
+          </article>
+
+          <article class="food-card">
+            <div class="food-image-box">
+              <img src="images/food_小龙虾圆图.jpg" alt="Wuhan Braised Crayfish">
+            </div>
+            <div class="food-content">
+              <h3>Braised Crayfish</h3>
+              <p>
+                Wuhan's signature summer delicacy, spicy braised crayfish loved by locals and visitors alike.
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="culture-panel">
+        <h2>Wuhan's Food Culture · The Soul of the River City</h2>
+        <p>
+          Wuhan's food culture is a vibrant reflection of the city's spirit—bold, diverse, and deeply rooted in its riverside history. As a hub of central China, Wuhan blends flavors from Hubei's rural countryside with the hustle and bustle of urban street food, creating a culinary landscape that is both iconic and endlessly delicious.
+        </p>
+        <p>
+          From the morning streets filled with the aroma of hot dry noodles, to the lively night markets serving braised crayfish, every bite tells a story of Wuhan's warmth, vitality, and love for good food. It is a city where food is not just sustenance, but a way of life, bringing people together around the table.
+        </p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Wuhan, Where Every Day is Different &amp; Every Journey is Wonderful</p>
+  </footer>
+
+  <script>
+    (function () {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      let currentIndex = 0;
+      let autoPlay;
+      let resumeTimeout;
+      const intervalTime = 3000;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+      }
+
+      function prevSlide() {
+        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        autoPlay = setInterval(nextSlide, intervalTime);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlay) {
+          clearInterval(autoPlay);
+          autoPlay = null;
+        }
+      }
+
+      function pauseThenResume() {
+        stopAutoPlay();
+        clearTimeout(resumeTimeout);
+        resumeTimeout = setTimeout(() => {
+          startAutoPlay();
+        }, 3000);
+      }
+
+      nextBtn.addEventListener('click', function () {
+        nextSlide();
+        pauseThenResume();
+      });
+
+      prevBtn.addEventListener('click', function () {
+        prevSlide();
+        pauseThenResume();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', function () {
+          showSlide(index);
+          pauseThenResume();
+        });
+      });
+
+      showSlide(0);
+      startAutoPlay();
+    })();
+  </script>
+</body>
+</html>

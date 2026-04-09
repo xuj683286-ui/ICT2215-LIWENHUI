@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YGNGL7PR2S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YGNGL7PR2S');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wuhan Scenic Spots</title>
+  <link rel="icon" href="images/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180x180.png">
+
+  <style>
+    :root {
+      --deep-pink: #D8A9B4;
+      --light-pink: #F8E2E8;
+      --white: #FFFFFF;
+      --deep-gray: #666666;
+      --soft-gray: #F5F5F5;
+      --transition: 0.3s ease;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --max-width: 1240px;
+      --shadow-soft: 0 6px 18px rgba(216, 169, 180, 0.18);
+      --shadow-card: 0 6px 16px rgba(216, 169, 180, 0.14);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: "Microsoft YaHei", Arial, sans-serif;
+      color: var(--deep-gray);
+      line-height: 1.7;
+      background: var(--light-pink);
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    a,
+    button {
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .nav-bar {
+      width: 100%;
+      background-color: rgba(216, 169, 180, 0.9);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(2px);
+    }
+
+    .nav-inner {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 0;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 42px;
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      position: relative;
+      display: inline-block;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--white);
+      padding: 6px 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background-color: var(--white);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .nav-link.active::after {
+      transform: scaleX(1);
+    }
+
+    main {
+      padding: 28px 0 40px;
+      background: var(--light-pink);
+    }
+
+    .carousel-section {
+      margin-bottom: 34px;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 540px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background-color: var(--soft-gray);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .carousel-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease-in-out;
+      z-index: 1;
+      background-color: var(--soft-gray);
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background-color: var(--soft-gray);
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(216, 169, 180, 0.10);
+      pointer-events: none;
+    }
+
+    .carousel-overlay h1 {
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.4px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .carousel-overlay p {
+      max-width: 800px;
+      color: var(--white);
+      font-size: 18px;
+      text-align: center;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.10);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 6;
+      width: 50px;
+      height: 50px;
+      border: none;
+      border-radius: 50%;
+      background-color: var(--deep-pink);
+      color: var(--white);
+      font-size: 28px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(216, 169, 180, 0.22);
+    }
+
+    .carousel-arrow:hover {
+      transform: translateY(-50%) scale(1.08);
+      filter: brightness(0.95);
+    }
+
+    .carousel-arrow.prev {
+      left: 18px;
+    }
+
+    .carousel-arrow.next {
+      right: 18px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 6;
+      display: flex;
+      gap: 10px;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: var(--white);
+      border: none;
+      opacity: 0.9;
+    }
+
+    .carousel-dot.active {
+      background-color: var(--deep-pink);
+      transform: scale(1.15);
+    }
+
+    .welcome-block {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .welcome-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      margin-bottom: 10px;
+    }
+
+    .welcome-divider {
+      width: 88px;
+      height: 2px;
+      background-color: var(--deep-pink);
+      margin: 0 auto 18px;
+      border-radius: 999px;
+    }
+
+    .welcome-subtitle {
+      font-size: 18px;
+      color: var(--white);
+      font-weight: 400;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .featured-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 24px;
+      margin-bottom: 36px;
+      align-items: stretch;
+    }
+
+    .featured-left,
+    .featured-right {
+      background-color: transparent;
+    }
+
+    .featured-left-heading {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .featured-right-spacer {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .featured-left-cards {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .featured-right-stack {
+      grid-column: 2;
+      grid-row: 2;
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 22px;
+      height: 100%;
+      min-height: 100%;
+    }
+
+    .block-title {
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .block-line {
+      width: 88px;
+      height: 2px;
+      background-color: var(--deep-pink);
+      border-radius: 999px;
+      margin: 0 auto 22px;
+    }
+
+    .scenic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      height: 100%;
+    }
+
+    .scenic-card {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .scenic-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(216, 169, 180, 0.18);
+    }
+
+    .scenic-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      background-color: var(--soft-gray);
+    }
+
+    .scenic-card-content {
+      background-color: var(--white);
+      padding: 18px 20px 22px;
+    }
+
+    .scenic-card-content h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .scenic-card-content p {
+      font-size: 15px;
+      color: var(--deep-gray);
+      line-height: 1.7;
+    }
+
+    .news-panel {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      padding: 22px 22px 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .news-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .news-header h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      line-height: 1.4;
+    }
+
+    .news-more {
+      font-size: 15px;
+      color: var(--deep-gray);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .news-more:hover {
+      color: var(--deep-pink);
+    }
+
+    .news-list {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 0;
+    }
+
+    .news-list li {
+      margin-bottom: 12px;
+      color: var(--deep-gray);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .news-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .map-section {
+      margin-bottom: 38px;
+    }
+
+    .map-panel {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      padding: 24px;
+    }
+
+    .map-image {
+      width: 100%;
+      background-color: var(--soft-gray);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+
+    .map-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      background-color: var(--soft-gray);
+    }
+
+    .events-section {
+      margin-bottom: 40px;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .event-card {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .event-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(216, 169, 180, 0.18);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      background-color: var(--soft-gray);
+    }
+
+    .event-card-content {
+      padding: 16px 18px 20px;
+      background-color: var(--white);
+      text-align: center;
+    }
+
+    .event-card-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--deep-gray);
+      line-height: 1.5;
+    }
+
+    .site-footer {
+      width: 100%;
+      background-color: var(--deep-pink);
+      color: var(--white);
+      text-align: center;
+      padding: 26px 16px;
+      margin-top: 10px;
+    }
+
+    .site-footer p {
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    @media (max-width: 1100px) {
+      .carousel {
+        height: 470px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 40px;
+      }
+
+      .featured-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+
+      .featured-left-heading {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .featured-right-spacer {
+        display: none;
+      }
+
+      .featured-left-cards {
+        grid-column: 1;
+        grid-row: 2;
+      }
+
+      .featured-right-stack {
+        grid-column: 1;
+        grid-row: 3;
+        grid-template-rows: auto auto;
+        height: auto;
+      }
+
+      .events-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .map-image img {
+        height: 420px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .nav-inner {
+        min-height: auto;
+        padding: 14px 0;
+      }
+
+      .nav-list {
+        gap: 22px;
+      }
+
+      .nav-link {
+        font-size: 18px;
+      }
+
+      .carousel {
+        height: 320px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 28px;
+      }
+
+      .carousel-overlay p {
+        font-size: 14px;
+      }
+
+      .carousel-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+      }
+
+      .welcome-title {
+        font-size: 30px;
+      }
+
+      .welcome-subtitle {
+        font-size: 16px;
+      }
+
+      .scenic-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .featured-right-stack {
+        gap: 22px;
+      }
+
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scenic-card img,
+      .event-card img {
+        height: 220px;
+      }
+
+      .map-panel {
+        padding: 18px;
+      }
+
+      .map-image img {
+        height: 300px;
+      }
+
+      .news-header h3 {
+        font-size: 22px;
+      }
+
+      .block-title {
+        font-size: 26px;
+      }
+
+      .scenic-card-content h3 {
+        font-size: 20px;
+      }
+
+      .scenic-card-content p,
+      .news-list li {
+        font-size: 15px;
+      }
+
+      .site-footer p {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel {
+        height: 250px;
+      }
+
+      .carousel-overlay h1 {
+        font-size: 22px;
+      }
+
+      .carousel-overlay p {
+        font-size: 13px;
+      }
+
+      .welcome-title {
+        font-size: 25px;
+      }
+
+      .block-title {
+        font-size: 22px;
+      }
+
+      .news-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .scenic-card-content h3,
+      .event-card-content h3 {
+        font-size: 18px;
+      }
+    }
+
+    /* ---------- Custom Hello Kitty Cursor（修复版） ---------- */
+    html,
+    body {
+      cursor: url("images/1.cur"), auto;
+    }
+
+    a,
+    button,
+    .nav-link,
+    .carousel-arrow,
+    .carousel-dot {
+      cursor: url("images/1.cur"), pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav-bar">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="index.html">Home</a></li>
+        <li><a class="nav-link" href="introduction.html">Introduction</a></li>
+        <li><a class="nav-link" href="food.html">Food</a></li>
+        <li><a class="nav-link active" href="scenic.html">Scenic Spots</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <div class="container">
+
+      <section class="carousel-section">
+        <div class="carousel" id="carousel">
+
+          <div class="carousel-slide active">
+            <img src="images/scenic_黄鹤楼上.jpg" alt="Yellow Crane Tower Panoramic View, Wuhan">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/scenic_东湖风景区上.jpg" alt="East Lake Scenic Area, Wuhan">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/scenic_长江大桥上.jpg" alt="Wuhan Yangtze River Bridge">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/scenic_晴川阁上.jpg" alt="Qingchuan Pavilion, Wuhan">
+          </div>
+
+          <div class="carousel-slide">
+            <img src="images/scenic_湖北省博物馆上.jpg" alt="Hubei Provincial Museum, Wuhan">
+          </div>
+
+          <div class="carousel-overlay">
+            <h1>Wuhan Scenic Spots</h1>
+            <p>Experience the city's famous landmarks, cultural treasures, and natural beauty through its most iconic destinations.</p>
+          </div>
+
+          <button class="carousel-arrow prev" id="prevBtn" aria-label="Previous slide">&#10094;</button>
+          <button class="carousel-arrow next" id="nextBtn" aria-label="Next slide">&#10095;</button>
+
+          <div class="carousel-dots" id="carouselDots">
+            <button class="carousel-dot active" aria-label="Go to slide 1"></button>
+            <button class="carousel-dot" aria-label="Go to slide 2"></button>
+            <button class="carousel-dot" aria-label="Go to slide 3"></button>
+            <button class="carousel-dot" aria-label="Go to slide 4"></button>
+            <button class="carousel-dot" aria-label="Go to slide 5"></button>
+          </div>
+        </div>
+      </section>
+
+      <section class="welcome-block">
+        <h1 class="welcome-title">Wuhan Scenic Spots · Explore the Charm of Jiangcheng</h1>
+        <div class="welcome-divider"></div>
+        <p class="welcome-subtitle">Discover the iconic landmarks and natural beauty of Wuhan</p>
+      </section>
+
+      <section class="featured-layout">
+
+        <div class="featured-left-heading">
+          <h2 class="block-title">Popular Scenic Spots</h2>
+          <div class="block-line"></div>
+        </div>
+
+        <div class="featured-right-spacer"></div>
+
+        <div class="featured-left-cards">
+          <div class="scenic-grid">
+
+            <article class="scenic-card">
+              <img src="images/scenic_黄鹤楼下.jpg" alt="Yellow Crane Tower, Wuhan">
+              <div class="scenic-card-content">
+                <h3>Yellow Crane Tower</h3>
+                <p>A legendary ancient tower overlooking the Yangtze River, a symbol of Wuhan.</p>
+              </div>
+            </article>
+
+            <article class="scenic-card">
+              <img src="images/scenic_东湖风景区下.jpg" alt="East Lake, Wuhan">
+              <div class="scenic-card-content">
+                <h3>East Lake Scenic Area</h3>
+                <p>China's largest urban lake, with stunning natural scenery and cherry blossoms.</p>
+              </div>
+            </article>
+
+            <article class="scenic-card">
+              <img src="images/scenic_长江大桥下.jpg" alt="Wuhan Yangtze River Bridge">
+              <div class="scenic-card-content">
+                <h3>Wuhan Yangtze River Bridge</h3>
+                <p>The first bridge over the Yangtze River, a landmark of Wuhan's engineering history.</p>
+              </div>
+            </article>
+
+            <article class="scenic-card">
+              <img src="images/scenic_湖北省博物馆下.jpg" alt="Hubei Provincial Museum, Wuhan">
+              <div class="scenic-card-content">
+                <h3>Hubei Provincial Museum</h3>
+                <p>Home to the famous Bianzhong bells, showcasing Hubei's ancient culture.</p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="featured-right-stack">
+
+          <aside class="featured-right">
+            <div class="news-panel">
+              <div class="news-header">
+                <h3>Latest Wuhan Travel News</h3>
+                <a class="news-more" href="#">&gt;&gt;More</a>
+              </div>
+
+              <ul class="news-list">
+                <li>Cherry Blossom Season at Wuhan University Kicks Off</li>
+                <li>Night Tour of the Yangtze River: New Cruise Routes Launched</li>
+                <li>Hubei Provincial Museum: New Cultural Exhibitions Open</li>
+                <li>Wuhan Scenic Spots: Spring Travel Guide Released</li>
+                <li>Qingchuan Pavilion: Historical Renovation Project Completed</li>
+              </ul>
+            </div>
+          </aside>
+
+          <aside class="featured-right">
+            <div class="news-panel">
+              <div class="news-header">
+                <h3>Wuhan Travel Tips &amp; Guides</h3>
+              </div>
+
+              <ul class="news-list">
+                <li>Best Time to Visit Wuhan: Spring &amp; Autumn for Pleasant Weather</li>
+                <li>Wuhan Metro Guide: Easy Access to All Top Scenic Spots</li>
+                <li>Local Food Recommendations Near Scenic Areas</li>
+                <li>Wuhan River Cruise: Best Viewpoints for Night Photography</li>
+                <li>Wuhan Cultural Festivals: Annual Events Not to Miss</li>
+              </ul>
+            </div>
+          </aside>
+
+        </div>
+
+      </section>
+
+      <section class="map-section">
+        <h2 class="block-title">Wuhan Tourist Attraction Map</h2>
+        <div class="block-line"></div>
+
+        <div class="map-panel">
+          <div class="map-image">
+            <img src="images/scenic_武汉旅游景点地图.jpg" alt="Wuhan Tourist Attraction Map">
+          </div>
+        </div>
+      </section>
+
+      <section class="events-section">
+        <h2 class="block-title">Featured Travel Events</h2>
+        <div class="block-line"></div>
+
+        <div class="events-grid">
+
+          <article class="event-card">
+            <img src="images/scenic_武汉樱花节.jpg" alt="Wuhan Cherry Blossom Festival">
+            <div class="event-card-content">
+              <h3>Wuhan Cherry Blossom Festival</h3>
+            </div>
+          </article>
+
+          <article class="event-card">
+            <img src="images/scenic_长江夜游会.jpg" alt="Yangtze River Night Cruise Gala">
+            <div class="event-card-content">
+              <h3>Yangtze River Night Cruise Gala</h3>
+            </div>
+          </article>
+
+          <article class="event-card">
+            <img src="images/scenic_湖北省博物馆文化展.jpg" alt="Hubei Museum Cultural Exhibition">
+            <div class="event-card-content">
+              <h3>Hubei Museum Cultural Exhibition</h3>
+            </div>
+          </article>
+
+          <article class="event-card">
+            <img src="images/scenic_武汉国际旅游节.jpg" alt="Wuhan International Tourism Festival">
+            <div class="event-card-content">
+              <h3>Wuhan International Tourism Festival</h3>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Wuhan, Where Every Day is Different &amp; Every Journey is Wonderful</p>
+  </footer>
+
+  <script>
+    (function () {
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+
+      let currentIndex = 0;
+      let autoPlay;
+      let resumeTimeout;
+      const intervalTime = 3000;
+
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+      }
+
+      function prevSlide() {
+        const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+      }
+
+      function startAutoPlay() {
+        stopAutoPlay();
+        autoPlay = setInterval(nextSlide, intervalTime);
+      }
+
+      function stopAutoPlay() {
+        if (autoPlay) {
+          clearInterval(autoPlay);
+          autoPlay = null;
+        }
+      }
+
+      function pauseThenResume() {
+        stopAutoPlay();
+        clearTimeout(resumeTimeout);
+        resumeTimeout = setTimeout(() => {
+          startAutoPlay();
+        }, 3000);
+      }
+
+      nextBtn.addEventListener('click', function () {
+        nextSlide();
+        pauseThenResume();
+      });
+
+      prevBtn.addEventListener('click', function () {
+        prevSlide();
+        pauseThenResume();
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', function () {
+          showSlide(index);
+          pauseThenResume();
+        });
+      });
+
+      showSlide(0);
+      startAutoPlay();
+    })();
+  </script>
+</body>
+</html>
